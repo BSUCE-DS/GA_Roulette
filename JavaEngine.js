@@ -92,36 +92,42 @@ function initFlashcards(container, deck) {
 }
 
 /* --- 2. Verb Roulette Engine --- */
-function initRoulette(container, verbDatabase) {
+function initRoulette(container, skillDatabase) {
     container.innerHTML = `
         <div class="ct-app-container" id="ct-roulette-app">
             <div class="ct-header">
-                <h2>Action Verb Roulette</h2>
-                <p>Spin for high-impact CV alternatives!</p>
+                <h2>Graduate Attribute Roulette</h2>
+                <p>Spin to discover a core BSU attribute and skill!</p>
             </div>
             <div class="ct-roulette-screen" id="ct-screen">
-                <span class="ct-category-tag" id="ct-category">Category</span>
-                <div class="ct-verb-wrapper"><h1 class="ct-verb-display" id="ct-verb">READY?</h1></div>
-                <div class="ct-example-box" id="ct-example-container">
+                <span class="ct-category-tag" id="ct-attribute">Attribute</span>
+                <div class="ct-verb-wrapper">
+                    <h1 class="ct-verb-display" id="ct-skill">READY?</h1>
+                </div>
+                <div class="ct-example-box" id="ct-description-container">
                     <span class="ct-example-label">Example Bullet Point:</span>
-                    <p class="ct-example-text" id="ct-example">Click spin to find your next great bullet point.</p>
+                    <p class="ct-example-text" id="ct-description">
+                        Click spin to find your next great bullet point.
+                    </p>
                 </div>
             </div>
             <div class="ct-controls-box">
-                <button class="ct-spin-btn" id="ct-spin-btn">ðŸŽ° Spin the Wheel</button>
+                <button class="ct-spin-btn" id="ct-spin-btn">🎰 Spin the Wheel</button>
             </div>
         </div>
     `;
 
-    const verbDisplay = document.getElementById('ct-verb');
-    const categoryTag = document.getElementById('ct-category');
-    const exampleText = document.getElementById('ct-example');
+    const skillDisplay = document.getElementById('ct-skill');
+    const attributeTag = document.getElementById('ct-attribute');
+    const descriptionText = document.getElementById('ct-description');
     const screen = document.getElementById('ct-screen');
     const spinBtn = document.getElementById('ct-spin-btn');
+
     let isSpinning = false;
 
     spinBtn.addEventListener('click', () => {
         if (isSpinning) return;
+
         isSpinning = true;
         spinBtn.disabled = true;
         spinBtn.innerText = "Spinning...";
@@ -129,29 +135,39 @@ function initRoulette(container, verbDatabase) {
         screen.classList.add('ct-spinning');
 
         let spinCount = 0;
-        const totalSpins = 20; 
-        const spinIntervalTime = 50; 
+        const totalSpins = 20;
+        const spinIntervalTime = 50;
 
         const spinInterval = setInterval(() => {
-            const randomVerb = verbDatabase[Math.floor(Math.random() * verbDatabase.length)].verb;
-            verbDisplay.innerText = randomVerb;
+            const randomSkill =
+                skillDatabase[Math.floor(Math.random() * skillDatabase.length)].skill;
+
+            skillDisplay.innerText = randomSkill;
             spinCount++;
+
             if (spinCount >= totalSpins) {
                 clearInterval(spinInterval);
-                landOnVerb();
+                landOnSkill();
             }
         }, spinIntervalTime);
     });
 
-    function landOnVerb() {
-        const finalSelection = verbDatabase[Math.floor(Math.random() * verbDatabase.length)];
-        verbDisplay.innerText = finalSelection.verb || 'VERB';
-        categoryTag.innerText = finalSelection.category || 'Category';
-        exampleText.innerText = '"' + (finalSelection.example || '...') + '"';
+    function landOnSkill() {
+        const finalSelection =
+            skillDatabase[Math.floor(Math.random() * skillDatabase.length)];
+
+        skillDisplay.innerText = finalSelection.skill || 'SKILL';
+        attributeTag.innerText = finalSelection.attribute || 'Attribute';
+        descriptionText.innerText =
+            '"' + (finalSelection.description || '...') + '"';
+
         screen.classList.remove('ct-spinning');
-        setTimeout(() => { screen.classList.add('ct-landed'); }, 50);
+        setTimeout(() => {
+            screen.classList.add('ct-landed');
+        }, 50);
+
         spinBtn.disabled = false;
-        spinBtn.innerText = "ðŸŽ° Spin Again";
+        spinBtn.innerText = "🎰 Spin Again";
         isSpinning = false;
     }
 }
