@@ -1,6 +1,7 @@
 /* ==========================================================================
    MIKE'S CAREERTECH TOOLKIT: UNIVERSAL WIDGETS JS ENGINE
    Handles logic and rendering for headless widgets
+   Thank you Mike Henson of University of Sunderland <3 :3
    ========================================================================== */
 
 // Runs immediately instead of waiting for DOMContentLoaded
