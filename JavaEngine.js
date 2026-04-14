@@ -4,12 +4,10 @@
    Thank you Mike Henson of University of Sunderland <3 :3
    ========================================================================== */
 
-// Runs immediately instead of waiting for DOMContentLoaded
 (function initCareerTechWidgets() {
     const container = document.getElementById("careertech-widget-container");
     if (!container) return;
 
-    const type = container.getAttribute("data-widget-type");
     const data = window.widgetData || [];
 
     if (data.length === 0) {
@@ -17,11 +15,10 @@
         return;
     }
 
-    if (type === "roulette") initRoulette(container, data);
-);
+    // Always initialise roulette
+    initRoulette(container, data);
 })();
-
-/* --- 2. Verb Roulette Engine --- */
+``
 function initRoulette(container, skillDatabase) {
     container.innerHTML = `
         <div class="ct-app-container" id="ct-roulette-app">
