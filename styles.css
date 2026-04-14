@@ -1,0 +1,110 @@
+/* ==========================================================================
+   MIKE'S CAREERTECH TOOLKIT: UNIVERSAL WIDGETS CSS
+   Provides styling and animations for headless widgets
+   ========================================================================== */
+
+/* --- Global Widget Resets --- */
+#careertech-widget-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--bg-text, #0f172a);
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+#careertech-widget-container * {
+    box-sizing: border-box;
+}
+
+/* =========================================
+   1. STAR FLASHCARDS
+========================================= */
+.ct-flashcard-wrapper { width: 100%; }
+.ct-scene { width: 100%; height: 480px; perspective: 1000px; margin-bottom: 25px; cursor: pointer; }
+.ct-card { width: 100%; height: 100%; position: relative; transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
+.ct-card.is-flipped { transform: rotateY(180deg); }
+.ct-card-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); display: flex; flex-direction: column; padding: 40px 30px; background: var(--bg, #ffffff); border: 1px solid #e2e8f0; }
+.ct-card-face--front { align-items: center; justify-content: center; text-align: center; border-top: 8px solid var(--primary, #6366f1); }
+.ct-question-tag { background: var(--primary, #6366f1); color: var(--primary-text, #ffffff); padding: 6px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; position: absolute; top: 30px; }
+.ct-question-text { font-size: 1.5rem; font-weight: bold; line-height: 1.4; margin: 0; color: var(--bg-text, #0f172a); }
+.ct-flip-hint { position: absolute; bottom: 30px; font-size: 0.9rem; font-weight: 600; color: #64748b; background: #f1f5f9; padding: 6px 16px; border-radius: 20px; }
+.ct-card-face--back { transform: rotateY(180deg); text-align: left; overflow-y: auto; border-top: 8px solid var(--primary, #6366f1); }
+.ct-back-title { color: #64748b; font-size: 0.85rem; font-weight: bold; text-transform: uppercase; margin-top: 0; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #e2e8f0; text-align: center; }
+.ct-star-item { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 15px; }
+.ct-star-letter { font-weight: bold; font-size: 1.1rem; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 8px; flex-shrink: 0; background: var(--primary, #6366f1); color: var(--primary-text, #ffffff); }
+.ct-star-content { font-size: 0.95rem; line-height: 1.5; color: var(--bg-text, #0f172a); }
+.ct-star-content strong { display: block; font-size: 0.8rem; text-transform: uppercase; color: #64748b; margin-bottom: 2px; }
+.ct-card-face--back::-webkit-scrollbar { width: 6px; }
+.ct-card-face--back::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+.ct-controls { display: flex; justify-content: space-between; align-items: center; }
+.ct-counter { font-weight: bold; color: #64748b; font-size: 0.95rem; }
+.ct-btn-outline { background: var(--bg, #ffffff); border: 2px solid #e2e8f0; color: var(--bg-text, #0f172a); padding: 10px 20px; border-radius: 30px; font-weight: bold; font-size: 0.9rem; cursor: pointer; transition: all 0.2s ease; }
+.ct-btn-outline:hover:not(:disabled) { border-color: var(--primary, #6366f1); color: var(--primary, #6366f1); }
+.ct-btn-outline:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* =========================================
+   2. VERB ROULETTE
+========================================= */
+.ct-app-container { width: 100%; background: var(--bg, #ffffff); border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; overflow: hidden; text-align: center; display: flex; flex-direction: column; }
+.ct-header { padding: 30px 20px; border-bottom: 1px solid #e2e8f0; }
+.ct-header h2 { margin: 0 0 8px 0; font-size: 1.8rem; font-weight: bold; color: var(--bg-text, #0f172a); }
+.ct-header p { margin: 0; font-size: 0.95rem; color: #64748b; }
+.ct-roulette-screen { padding: 40px 20px; min-height: 220px; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(0,0,0,0.02); }
+.ct-category-tag { background: var(--bg-text, #0f172a); color: var(--bg, #ffffff); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; margin-bottom: 20px; opacity: 0; transition: opacity 0.3s; }
+.ct-verb-wrapper { height: 60px; display: flex; align-items: center; justify-content: center; }
+.ct-verb-display { font-size: 2.5rem; font-weight: bold; color: var(--bg-text, #0f172a); margin: 0; text-transform: uppercase; transition: all 0.2s ease; }
+.ct-spinning .ct-verb-display { filter: blur(2px); opacity: 0.5; transform: scale(0.95); }
+.ct-landed .ct-verb-display { color: var(--primary, #6366f1); animation: ct-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes ct-pop { 0% { transform: scale(0.9); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+.ct-example-box { background: var(--bg, #ffffff); border: 1px solid #e2e8f0; border-left: 4px solid var(--primary, #6366f1); border-radius: 6px; padding: 15px; margin-top: 25px; width: 90%; max-width: 500px; opacity: 0; transform: translateY(10px); transition: all 0.4s ease; text-align: left; }
+.ct-landed .ct-example-box { opacity: 1; transform: translateY(0); }
+.ct-landed .ct-category-tag { opacity: 1; }
+.ct-example-label { font-size: 0.75rem; color: #64748b; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; display: block; }
+.ct-example-text { font-size: 1rem; margin: 0; line-height: 1.5; color: var(--bg-text, #0f172a); }
+.ct-controls-box { padding: 25px 20px; border-top: 1px solid #e2e8f0; }
+.ct-spin-btn { background: var(--primary, #6366f1); color: var(--primary-text, #ffffff); border: none; padding: 14px 40px; border-radius: 30px; font-size: 1.05rem; font-weight: bold; cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
+.ct-spin-btn:hover:not(:disabled) { transform: translateY(-2px); opacity: 0.9; }
+.ct-spin-btn:disabled { background: #cbd5e1; color: #ffffff; cursor: not-allowed; transform: none; }
+
+/* =========================================
+   3. MYTHBUSTER
+========================================= */
+.ct-progress-text { text-align: center; font-size: 0.9rem; color: #64748b; font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
+.ct-myth-card { background: var(--bg, #ffffff); border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.05); padding: 40px 30px; text-align: center; position: relative; overflow: hidden; transition: all 0.3s ease; }
+.ct-statement { font-size: 1.4rem; font-weight: bold; line-height: 1.4; margin: 0 0 30px 0; color: var(--bg-text, #0f172a); }
+.ct-actions { display: flex; gap: 15px; justify-content: center; }
+.ct-btn { flex: 1; padding: 14px; border: 2px solid; border-radius: 8px; font-size: 1.1rem; font-weight: bold; cursor: pointer; transition: all 0.2s; background: transparent; }
+.ct-btn-myth { border-color: #ef4444; color: #ef4444; }
+.ct-btn-myth:hover { background: #ef4444; color: white; }
+.ct-btn-fact { border-color: #10b981; color: #10b981; }
+.ct-btn-fact:hover { background: #10b981; color: white; }
+.ct-result-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg, #ffffff); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; box-sizing: border-box; opacity: 0; pointer-events: none; transition: opacity 0.3s; z-index: 10; }
+.ct-result-overlay.active { opacity: 1; pointer-events: all; }
+.ct-result-badge { padding: 6px 16px; border-radius: 20px; font-weight: bold; color: white; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+.ct-correct-badge { background: #10b981; }
+.ct-incorrect-badge { background: #ef4444; }
+.ct-explanation { font-size: 1.05rem; line-height: 1.5; margin-bottom: 25px; color: var(--bg-text, #0f172a); }
+.ct-next-btn { background: var(--primary, #6366f1); color: var(--primary-text, #ffffff); border: none; padding: 12px 30px; border-radius: 30px; font-weight: bold; font-size: 1rem; cursor: pointer; }
+.ct-end-screen { display: none; text-align: center; padding: 40px 20px; background: var(--bg, #ffffff); border-radius: 16px; border: 1px solid #e2e8f0; }
+
+/* =========================================
+   4. DO'S AND DON'TS GRID
+========================================= */
+.ct-dd-header { text-align: center; margin-bottom: 25px; }
+.ct-dd-header h2 { margin: 0 0 10px 0; font-size: 1.8rem; font-weight: bold; color: var(--bg-text, #0f172a); }
+.ct-dd-header p { margin: 0; color: #64748b; font-size: 1rem; }
+.ct-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; width: 100%; }
+.ct-tile { perspective: 1000px; height: 180px; cursor: pointer; }
+.ct-tile-inner { width: 100%; height: 100%; position: relative; transition: transform 0.6s; transform-style: preserve-3d; }
+.ct-tile.flipped .ct-tile-inner { transform: rotateY(180deg); }
+.ct-tile-face { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.ct-tile-front { background: var(--bg, #ffffff); border: 1px solid #e2e8f0; transition: border-color 0.2s; }
+.ct-tile:hover .ct-tile-front { border-color: var(--primary, #6366f1); }
+.ct-tile-front p { margin: 0; font-size: 1.1rem; font-weight: bold; color: var(--bg-text, #0f172a); }
+.ct-click-hint { font-size: 0.8rem; color: #94a3b8; margin-top: 15px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.5px; }
+.ct-tile-back { transform: rotateY(180deg); color: white; padding: 20px 30px; }
+.ct-tile-back.do-card { background: #10b981; }
+.ct-tile-back.dont-card { background: #ef4444; }
+.ct-status-icon { font-size: 2rem; margin-bottom: 10px; }
+.ct-tile-back p { margin: 0; font-size: 0.95rem; line-height: 1.4; font-weight: 500; color: white;}
